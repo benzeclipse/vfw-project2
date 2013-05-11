@@ -15,17 +15,17 @@ window.addEventListener( "DOMContentLoaded", function() {
 	// Create drop down elements
 	function dropDownList ( ) {
 		var formTag = document.getElementsByTagName("form");  //form tags are an array
-		selector = killAll('addSelect');
-		makeSelect = document.createElement('select');
-		makeSelect.setAttribute("id", "groupie");   // used for idGetter function
-	 for ( var i = 0, j= addGroup.length; i<j; i++) {
+		selector = killAll('mStuff');
+		makeSelection = document.createElement('select');
+		makeSelection.setAttribute("id", "groupie");   // used for idGetter function
+	 for ( var i = 0, j= addGroups.length; i<j; i++) {
 	 		var makeOpt = document.createElement('option');
-	 		var opt = addGroup[i];
+	 		var opt = addGroups[i];
 	 		makeOpt.setAttribute("value", opt);
 	 		makeOpt.innerHTML = opt;
-	 		makeSelect.appendChild(makeOpt);
+	 		makeSelection.appendChild(makeOpt);
 	    }
-	    selector.appendChild(makeSelect);
+	    selector.appendChild(makeSelection);
 	}
 	
 	// Find values of selected radio buttons
@@ -36,18 +36,41 @@ window.addEventListener( "DOMContentLoaded", function() {
 			seasonValue = setRadios[i].value;
 		   }
 	 }
-}
+}	 
+ 
+    function toggle( t ) {
+	 	switch(t) {
+	 		case "on" :
+	 			//killAll('contactForm').style.display ="none";
+	 			killAll('Info').style.display ="inline";
+	 			killAll('cData').style.display ="none";
+	 			killAll('addNew').style.display = "inline";
+	 			break;
+	 		
+	 		case "off" :
+	 			//killAll('contactForm').style.display ="block";
+	 			killAll('Info').style.display ="inline";
+	 			killAll('cData').style.display ="inline";
+	 			killAll('addNew').style.display = "none";
+	 			killAll('items').style.display="none";
+	 			break;
+	 		default:
+	 			return false;
+	 	}
+	 
+	 }
+
 	
-	
+	// get random number
 	function storeLocalData() {
 		var getId = Math.floor(Math.random()*100000001);
 		// Get all form fields values and store into object.
 		// Object properties contains array with the form label and input value.
 		
-		getRadios();
+		 getRadios();
 		
 		var it 			= {};
-			it.group 	= ["Group ", killAll('groupie').value ];  // value is important
+			it.group 	= ["More Stuff ", killAll('groupie').value ];  // value is important
 			it.sport	= ["Sports ", killAll("sport").value];
 			it.tname	= ["Team Name ", killAll("tname").value];
 			it.name		= ["Name", killAll("name").value];
@@ -62,24 +85,79 @@ window.addEventListener( "DOMContentLoaded", function() {
 			alert("Contacts has been saved!");
 			
 }
-
+	// write data from local storage to browser
+	function getData () {
+		
+		toggle("on");
 	
-	// Variable defaults
-	var addGroup = [ "tickets", "souvenirs", "apparels" ],
+	if( localStorage.length === 0 ) {
+		alert("Nothing to show")
+		
+	}else{
+	
+		var make = document.createElement("div");
+		make.setAttribute("id", "items");
+		var makeList = document.createElement('ul');
+		make.appendChild(makeList);
+		
+		document.body.appendChild(make);
+		killAll('items').style.display="block";
+		
+		// looking in local storage
+		for(var i=0, j=localStorage.length; i<j; i++) {
+			var makeli = document.createElement("li");
+			makeList.appendChild(makeli);
+			var key = localStorage.key(i);
+			var value = localStorage.getItem(key);
+			
+			var object = JSON.parse(value); // convert local storage string back to object
+			var makeSubList = document.createElement('ul');
+			makeli.appendChild(makeSubList);
+			for ( var m in object ) {
+				var makeSubLi = document.createElement("li");
+				makeSubList.appendChild(makeSubLi);
+				var optSub = object[m][0]+" : "+object[m][1];
+				makeSubLi.innerHTML = optSub;
+			
+			}
+			
+		}
+	}
+}	
+
+function clearLocalData () {
+	if( localStorage.length === 0 ) {
+			alert("Local storage is empty")
+		}else{
+			localStorage.clear();
+			alert("All data is Deleted!");
+			window.location.reload();
+			return false;
+	}
+} 
+
+
+
+	// Variable defaults drop down menu
+	var addGroups = [ "tickets", "souvenirs", "apparels" ],
 		seasonValue;
 
 	dropDownList();
 	
  	// Set Links and Submit Click Events	
- 	/*
- 	var clearLink = killAll("cData");
- 	var displayData = killAll("sData");
-	displayData.addEventListener("click", getData);
-	clearLink.addEventLister("click", clearLocal);
-	*/
+	var displayData = killAll("Info");
+	displayData.addEventListener("click", getData );
 	
 	var sButton = killAll("bValue");
 	sButton.addEventListener("click", storeLocalData);
 
+	var clearLink = killAll("cData");
+	clearLink.addEventListener("click", clearLocalData);
 	
+	//var rangeSlider = killAll("range");
+	//rangeSlider.addEventListener("click", slider);
+	
+	//var rangeValue = killAll("idRange");
+	//rangeValue.addEventListener("click", ranger);
+
 });

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Ticket Hub</title>
- 	<link rel="stylesheet" href="styles.css" type="text/css" />
+ 	
     <meta charset="UTF-8">
     <meta name = "MobileOptimized" content= "320" />
     <meta name = "robot" content="index, follow" />
@@ -24,22 +24,19 @@
   	  			</ul>
 </fieldset>
 	<fieldset>
-			<legend>Preferences</legend>
+			<legend>Availability</legend>
 				<ul>
 					<text> Available dates: </text>
-					<li><input id="aDate"  <input type="date" />
-					
-				<ul class ="checkbox">
+					<li><input id="aDate"  <input type="date" />		
 					<li><input type="radio" value="Single"  id="single" name="any"/><label for => Single Ticket </label></li>
  					<li><input type="radio" value ="Season" id="season" name="any"/><label for => Season Ticket</label></li>
- 				</ul>
 					<li><label => Price Range </label><input type="range" id="range" min="1" max="10000"  step="1" value="0.00"/></li>
-  	  			</ul>
+  	  			
 	 </fieldset>
 <fieldset>
-	<legend>Sport preferences</legend>
+	<legend>Preferences</legend>
 <ul>
- 	<label for="payments">Preferred Method of Payment</label>
+ 	<li><label for="payments">Preferred Method of Payment</label></li>
 		<select id="payments">
 			<optgroup label="Method">
 			    <option value ="Credit" id="credit">Credit Card</option>
@@ -50,12 +47,14 @@
 	 <li><label for="concerns"> Please tell us what seats and pricing you prefer </label><textarea id="concerns"></textarea></i>			
 </ul>
 	</fieldset>
-<input type= "button" value = "SEARCHING" id="bValue" name="any"/>
+<input type= "button" value = "Saving Info" id="bValue" name="any"/>
 	</form>
 		 <nav>
-		 <ol><a href="#" id="cData"> Clear Data </a></ol>
-		 <ol><a href="#" id="sData"> Save Data </a></ol> 
-	 </nav>
+				<a href="#" id="Info"> Show Info</a></li>
+				<a href="#" id="Data">Clear Data</a>
+			    <a href="Pageadditem.html" id="addNew">Refresh Data</a>
+			    			
+	    </nav>
      	  <script type="text/javascript" src="main.js"></script>
  	 </body>
 </html>
