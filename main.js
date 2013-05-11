@@ -13,7 +13,7 @@ window.addEventListener( "DOMContentLoaded", function() {
 }
 
 	// Create drop down elements
-	function dropDown ( ) {
+	function dropDownList ( ) {
 		var formTag = document.getElementsByTagName("form");  //form tags are an array
 		selector = killAll('addSelect');
 		makeSelect = document.createElement('select');
@@ -40,7 +40,7 @@ window.addEventListener( "DOMContentLoaded", function() {
 	
 	
 	function storeLocalData() {
-		var idGetter = Math.floor(Math.random()*100000001);
+		var getId = Math.floor(Math.random()*100000001);
 		// Get all form fields values and store into object.
 		// Object properties contains array with the form label and input value.
 		
@@ -58,7 +58,7 @@ window.addEventListener( "DOMContentLoaded", function() {
 			it.season	= ["Season ", seasonValue];
 	       
 			// save data to local storage! use Stringify to convert our object to a string
-			localStorage.setItem( idGetter, JSON.stringify(it) );
+			localStorage.setItem( getId, JSON.stringify(it) );
 			alert("Contacts has been saved!");
 			
 }
@@ -68,7 +68,7 @@ window.addEventListener( "DOMContentLoaded", function() {
 	var addGroup = [ "tickets", "souvenirs", "apparels" ],
 		seasonValue;
 
-	dropDown();
+	dropDownList();
 	
  	// Set Links and Submit Click Events	
  	/*
