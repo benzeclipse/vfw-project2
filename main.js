@@ -18,9 +18,9 @@ window.addEventListener( "DOMContentLoaded", function() {
 		selector = killAll('addSelect');
 		makeSelect = document.createElement('select');
 		makeSelect.setAttribute("id", "groupie");   // used for idGetter function
-	 for ( var i = 0, j= payGroup.length; i<j; i++) {
+	 for ( var i = 0, j= addGroup.length; i<j; i++) {
 	 		var makeOpt = document.createElement('option');
-	 		var opt = payGroup[i];
+	 		var opt = addGroup[i];
 	 		makeOpt.setAttribute("value", opt);
 	 		makeOpt.innerHTML = opt;
 	 		makeSelect.appendChild(makeOpt);
@@ -29,11 +29,11 @@ window.addEventListener( "DOMContentLoaded", function() {
 	}
 	
 	// Find values of selected radio buttons
-	function getSelectedRadio() {
-		var radio = document.forms[0];
-		for ( var i=0; i<radio.length; i++) {
-			if(radio[i].checked) {
-			seasonValue = radio[i].value;
+	function getRadios() {
+		var setRadios = document.forms[0].any;
+		for ( var i=0; i<setRadios.length; i++) {
+			if(setRadios[i].checked) {
+			seasonValue = setRadios[i].value;
 		   }
 	 }
 }
@@ -44,7 +44,7 @@ window.addEventListener( "DOMContentLoaded", function() {
 		// Get all form fields values and store into object.
 		// Object properties contains array with the form label and input value.
 		
-		getSelectedRadio();
+		getRadios();
 		
 		var it 			= {};
 			it.group 	= ["Group ", killAll('groupie').value ];  // value is important
@@ -54,14 +54,9 @@ window.addEventListener( "DOMContentLoaded", function() {
 			it.concerns = ["Concerns", killAll("concerns").value];
 			it.range	= ["Price Range ", killAll("range").value];
 			it.aDate	= ["Date ", killAll("aDate").value];
-			
+			it.payments	= ["Payments ", killAll("payments").value];	
 			it.season	= ["Season ", seasonValue];
-	/*       it.single	= ["Single ", singleValue];
-			 it.any		= ["Any", anyValue];
-			
-	*/		
-			
-			
+	       
 			// save data to local storage! use Stringify to convert our object to a string
 			localStorage.setItem( idGetter, JSON.stringify(it) );
 			alert("Contacts has been saved!");
@@ -70,7 +65,7 @@ window.addEventListener( "DOMContentLoaded", function() {
 
 	
 	// Variable defaults
-	var payGroup = [ "ticket", "souvenir", "apparels" ],
+	var addGroup = [ "tickets", "souvenirs", "apparels" ],
 		seasonValue;
 
 	dropDown();
