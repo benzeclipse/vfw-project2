@@ -1,15 +1,16 @@
 html {
-     background-color: #F0F8FF;
+     background-color: #87CEFA;
 }
 body {
     font-family: "Helvetica", "Arial", sans-serif;
     margin: 1.5em auto;
     padding: 1.5em;
-    background-color: white;
+    background-color: #F0F8FF;
     color: #000000;
     max-width: 30em;
-    border: 0.75em solid #87CEFA;
+    border: .55em solid #1E90FF;
     line-height: 1.5em;
+    
 }
 p {
     margin: 1.5em 0;
@@ -18,18 +19,22 @@ p {
 h1 {
 	
 	text-align: center;
-    background-color: #0000CD;
-    color: #ffffff;
-    font-size: 210%;
+    background-color: #1E90FF;
+    color: #F8F8FF;
+    font-size: 200%;
     padding: 1em;
-    margin: 
+    border: 3px solid black;
+    font-family:"Times New Roman", Times, serif;
+
 }
 
 h2 {
 	text-align: left;
 	font-size: 130%;
-	color: #4169E1;
+	color: #9400D3;
 	text-align: center;
+    padding: 1em;
+    font-family:"Times New Roman", Times, serif;
 }
 
 label {
@@ -38,10 +43,14 @@ label {
 }
 
 
-
 nav {
 	font-size: 120%;
 	text-align: center;
+	color: #000000;
+	padding: .5em;
+    background-color: #87CEFA;
+    border: 1px solid black;
+    font-family:"Times New Roman", Times, serif;
 }
 
 input {
@@ -59,14 +68,11 @@ legend {
 	text-align: center;
 	font-size: 130%;
 	font-weight: bold;
-	color: #4169E1;
+	color: #0000FF;
+	font-family:"Times New Roman", Times, serif;
 }
 
 fieldset {
 	margin: .2em 0;
 }
 
-form {
-
-
-}
