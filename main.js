@@ -7,20 +7,20 @@
 window.addEventListener( "DOMContentLoaded", function() {
 
 	// getElementById function
-	function killAll ( clear ) {
+	function main ( clear ) {
 	var teams = document.getElementById( clear );
 	return teams;
 }
 
-	// Create drop down elements
+	// Create drop down elements from js
 	function dropDownList ( ) {
 		var formTag = document.getElementsByTagName("form");  //form tags are an array
-		selector = killAll('mStuff');
+		selector = main('mStuff');
 		makeSelection = document.createElement('select');
-		makeSelection.setAttribute("id", "groupie");   // used for idGetter function
-	 for ( var i = 0, j= addGroups.length; i<j; i++) {
+		makeSelection.setAttribute("id", "groups");   // used for idGetter function
+	 for ( var i = 0, j= addStuff.length; i<j; i++) {
 	 		var makeOpt = document.createElement('option');
-	 		var opt = addGroups[i];
+	 		var opt = addStuff[i];
 	 		makeOpt.setAttribute("value", opt);
 	 		makeOpt.innerHTML = opt;
 	 		makeSelection.appendChild(makeOpt);
@@ -41,18 +41,16 @@ window.addEventListener( "DOMContentLoaded", function() {
     function toggle( t ) {
 	 	switch(t) {
 	 		case "on" :
-	 			//killAll('contactForm').style.display ="none";
-	 			killAll('Info').style.display ="inline";
-	 			killAll('cData').style.display ="none";
-	 			killAll('addNew').style.display = "inline";
+	 			main('Info').style.display ="inline";
+	 			main('cData').style.display ="none";
+	 			main('addNew').style.display = "inline";
 	 			break;
 	 		
 	 		case "off" :
-	 			//killAll('contactForm').style.display ="block";
-	 			killAll('Info').style.display ="inline";
-	 			killAll('cData').style.display ="inline";
-	 			killAll('addNew').style.display = "none";
-	 			killAll('items').style.display="none";
+	 			main('Info').style.display ="inline";
+	 			main('cData').style.display ="inline";
+	 			main('addNew').style.display = "none";
+	 			main('items').style.display="none";
 	 			break;
 	 		default:
 	 			return false;
@@ -70,38 +68,37 @@ window.addEventListener( "DOMContentLoaded", function() {
 		 getRadios();
 		
 		var it 			= {};
-			it.group 	= ["More Stuff ", killAll('groupie').value ];  // value is important
-			it.sport	= ["Sports ", killAll("sport").value];
-			it.tname	= ["Team Name ", killAll("tname").value];
-			it.name		= ["Name", killAll("name").value];
-			it.concerns = ["Concerns", killAll("concerns").value];
-			it.range	= ["Price Range ", killAll("range").value];
-			it.aDate	= ["Date ", killAll("aDate").value];
-			it.payments	= ["Payments ", killAll("payments").value];	
+			
+			it.sport	= ["Sports ", main("sport").value];
+			it.tname	= ["Team Name ", main("tname").value];
+			it.name		= ["Name", main("name").value];
+			it.group 	= ["More Stuff ", main('groups').value ];  // value is important
+			it.aDate	= ["Date ", main("aDate").value];
+			it.range	= ["Price Range ", main("range").value];
 			it.season	= ["Season ", seasonValue];
+			it.payments	= ["Payments ", main("payments").value];	
+			it.concerns = ["Concerns", main("concerns").value];
 	       
 			// save data to local storage! use Stringify to convert our object to a string
 			localStorage.setItem( getId, JSON.stringify(it) );
-			alert("Contacts has been saved!");
+			alert("Data has been saved!");
 			
 }
 	// write data from local storage to browser
 	function getData () {
-		
 		toggle("on");
 	
-	if( localStorage.length === 0 ) {
+		if( localStorage.length === 0 ) {
 		alert("Nothing to show")
 		
-	}else{
-	
+		}else{
+		
 		var make = document.createElement("div");
 		make.setAttribute("id", "items");
 		var makeList = document.createElement('ul');
-		make.appendChild(makeList);
-		
+		make.appendChild(makeList);		
 		document.body.appendChild(make);
-		killAll('items').style.display="block";
+		main('items').style.display="block";	
 		
 		// looking in local storage
 		for(var i=0, j=localStorage.length; i<j; i++) {
@@ -109,11 +106,11 @@ window.addEventListener( "DOMContentLoaded", function() {
 			makeList.appendChild(makeli);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
-			
 			var object = JSON.parse(value); // convert local storage string back to object
 			var makeSubList = document.createElement('ul');
 			makeli.appendChild(makeSubList);
 			for ( var m in object ) {
+			
 				var makeSubLi = document.createElement("li");
 				makeSubList.appendChild(makeSubLi);
 				var optSub = object[m][0]+" : "+object[m][1];
@@ -126,38 +123,35 @@ window.addEventListener( "DOMContentLoaded", function() {
 }	
 
 function clearLocalData () {
-	if( localStorage.length === 0 ) {
-			alert("Local storage is empty")
-		}else{
-			localStorage.clear();
-			alert("All data is Deleted!");
-			window.location.reload();
-			return false;
-	}
-} 
+	var youSure = confirm("You sure you want to delete?");
+		if(youSure){
+			if( localStorage.length === 0 ) {
+				alert("Local storage is empty")
+			}else{
+				localStorage.clear();
+				alert("All data has been deleted!");
+				window.location.reload();
+				return false;
+			}
+	} 
 
-
+}
 
 	// Variable defaults drop down menu
-	var addGroups = [ "tickets", "souvenirs", "apparels" ],
+	var addStuff = [ "tickets", "souvenirs", "apparels" ],
 		seasonValue;
 
 	dropDownList();
 	
  	// Set Links and Submit Click Events	
-	var displayData = killAll("Info");
+	var displayData = main("Info");
 	displayData.addEventListener("click", getData );
 	
-	var sButton = killAll("bValue");
+	var sButton = main("bValue");
 	sButton.addEventListener("click", storeLocalData);
 
-	var clearLink = killAll("cData");
+	var clearLink = main("cData");
 	clearLink.addEventListener("click", clearLocalData);
-	
-	//var rangeSlider = killAll("range");
-	//rangeSlider.addEventListener("click", slider);
-	
-	//var rangeValue = killAll("idRange");
-	//rangeValue.addEventListener("click", ranger);
+
 
 });
